@@ -21,8 +21,8 @@ const Header = () => {
       animate={loaded ? { 
         y: 0, 
         opacity: 1,
-        backgroundColor: scrolled ? 'rgba(34, 40, 49, 0.95)' : 'rgba(34, 40, 49, 1)',
-        backdropFilter: scrolled ? 'blur(8px)' : 'blur(0)'
+        backgroundColor: scrolled ? 'rgba(15, 23, 42, 0.9)' : 'rgba(15, 23, 42, 0.5)',
+        backdropFilter: scrolled ? 'blur(8px)' : 'blur(4px)'
       } : {}}
       transition={{ duration: 0.5 }}
       className="fixed w-full top-0 z-50 shadow-md"
@@ -43,12 +43,12 @@ const Header = () => {
           >
             <motion.div 
               whileHover={{ rotate: 5, scale: 1.05 }}
-              className="rounded-full overflow-hidden border-2 border-[#DBC078] p-1.5 bg-white" // Aumentado el padding
+              className="rounded-full overflow-hidden border-2 border-[#DBC078] p-1.5 bg-white"
             >
               <img 
                 src="/SC.png" 
                 alt="Logo Santiago Cabarcas" 
-                className="h-10 w-auto object-cover" // Tamaño aumentado a h-10 (40px)
+                className="h-10 w-auto object-cover"
               />
             </motion.div>
             
@@ -100,7 +100,7 @@ const Header = () => {
               whileTap={{ scale: 0.95 }}
               className="text-[#DBC078] p-2 rounded-full transition-colors"
             >
-              <FaWhatsapp size={18} /> {/* Icono ligeramente más grande */}
+              <FaWhatsapp size={18} />
             </motion.a>
             
             <motion.a
@@ -113,7 +113,7 @@ const Header = () => {
               whileTap={{ scale: 0.95 }}
               className="text-[#DBC078] p-2 rounded-full transition-colors"
             >
-              <FaEnvelope size={18} /> {/* Icono ligeramente más grande */}
+              <FaEnvelope size={18} />
             </motion.a>
           </motion.div>
         </div>
@@ -123,7 +123,7 @@ const Header = () => {
       <motion.div 
         initial={{ scaleX: 0 }}
         animate={loaded ? { scaleX: 1 } : {}}
-        transitionxa={{ duration: 0.8, delay: 0.8 }}
+        transition={{ duration: 0.8, delay: 0.8 }}
         className="h-0.5 bg-[#DBC078] origin-left"
       />
     </motion.header>
