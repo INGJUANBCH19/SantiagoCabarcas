@@ -21,15 +21,16 @@ const Header = () => {
       animate={loaded ? { 
         y: 0, 
         opacity: 1,
-        backgroundColor: scrolled ? 'rgba(15, 23, 42, 0.9)' : 'rgba(15, 23, 42, 0.5)',
-        backdropFilter: scrolled ? 'blur(8px)' : 'blur(4px)'
+        backgroundColor: scrolled ? 'rgba(89, 49, 52, 0.95)' : 'rgba(89, 49, 52, 0.7)',
+        backdropFilter: scrolled ? 'blur(8px)' : 'blur(4px)',
+        boxShadow: scrolled ? '0 4px 12px rgba(0, 0, 0, 0.1)' : 'none'
       } : {}}
       transition={{ duration: 0.5 }}
-      className="fixed w-full top-0 z-50 shadow-md"
+      className="fixed w-full top-0 z-50"
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-[1800px] mx-auto px-6">
         <div className="flex items-center justify-between py-3">
-          {/* Logo grande con animación */}
+          {/* Logo y navegación */}
           <motion.div 
             initial={{ scale: 0.8, opacity: 0 }}
             animate={loaded ? { scale: 1, opacity: 1 } : {}}
@@ -52,7 +53,6 @@ const Header = () => {
               />
             </motion.div>
             
-            {/* Menú de navegación */}
             <motion.nav 
               initial={{ opacity: 0 }}
               animate={loaded ? { opacity: 1 } : {}}
@@ -73,7 +73,7 @@ const Header = () => {
                     color: '#DBC078',
                     y: -2
                   }}
-                  className="text-[#e6d3a0] text-sm uppercase tracking-wider transition-colors"
+                  className="text-[#F2F2F2] text-sm uppercase tracking-wider transition-colors hover:text-[#DBC078]"
                 >
                   {item}
                 </motion.a>
@@ -94,7 +94,6 @@ const Header = () => {
               rel="noopener noreferrer"
               whileHover={{ 
                 scale: 1.1,
-                color: '#e6d3a0',
                 backgroundColor: 'rgba(219, 192, 120, 0.2)'
               }}
               whileTap={{ scale: 0.95 }}
@@ -107,7 +106,6 @@ const Header = () => {
               href="mailto:contacto@ejemplo.com"
               whileHover={{ 
                 scale: 1.1,
-                color: '#e6d3a0',
                 backgroundColor: 'rgba(219, 192, 120, 0.2)'
               }}
               whileTap={{ scale: 0.95 }}
@@ -124,7 +122,7 @@ const Header = () => {
         initial={{ scaleX: 0 }}
         animate={loaded ? { scaleX: 1 } : {}}
         transition={{ duration: 0.8, delay: 0.8 }}
-        className="h-0.5 bg-[#DBC078] origin-left"
+        className="h-0.5 bg-[#D91E2E] origin-left w-full"
       />
     </motion.header>
   );

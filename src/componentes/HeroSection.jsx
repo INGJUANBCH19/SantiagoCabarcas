@@ -1,11 +1,18 @@
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 export const HeroSection = () => {
   const [loaded, setLoaded] = useState(false);
+  const particlesContainerRef = useRef(null);
 
   useEffect(() => {
     setLoaded(true);
+    return () => {
+      // Cleanup para evitar el error al desmontar
+      if (particlesContainerRef.current) {
+        particlesContainerRef.current = null;
+      }
+    };
   }, []);
 
   return (
@@ -13,108 +20,150 @@ export const HeroSection = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden" // Añadido justify-center
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#593134]" // Fallback background
     >
-      {/* Banner de fondo */}
+      {/* Fondo con overlay mejorado */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/banner2.jpg"
+          src="/images/banner2.png"
           alt="Banner profesional"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-center brightness-75 contrast-110"
         />
-        {/* Overlay oscuro */}
-        <div className="absolute inset-0 bg-black opacity-50"></div>
+        {/* Overlay degradado más intenso */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#592533]/95 via-[#593134]/80 to-transparent"></div>
       </div>
 
-      {/* Contenido centrado */}
-      <div className="w-full px-6 py-20 relative z-10 flex justify-center"> {/* Añadido flex justify-center */}
-        {/* Contenedor del contenido con máximo ancho */}
+      {/* Contenido principal */}
+      <div className="w-full px-6 py-20 relative z-10">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={loaded ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="bg-black bg-opacity-50 backdrop-blur-sm p-8 rounded-lg w-full max-w-2xl text-center" // Añadido text-center
+          initial={{ opacity: 0, y: 20 }}
+          animate={loaded ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mx-auto max-w-4xl text-center"
         >
-          {/* Nombre */}
+          {/* Nombre con mejor contraste */}
           <motion.h1
-            initial={{ x: -50, opacity: 0 }}
-            animate={loaded ? { x: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-serif mb-6 leading-tight text-white"
+            initial={{ opacity: 0 }}
+            animate={loaded ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-[#F2F2F2] mb-4 leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
           >
-            Santiago Cabarcas<br />
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={loaded ? { opacity: 1 } : {}}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-[#DBC078]"
-            >
-              Abogado Especializado
-            </motion.span>
+            Santiago Cabarcas
           </motion.h1>
 
-          {/* Descripción */}
+          {/* Línea divisoria acentuada */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={loaded ? { scaleX: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="h-1 w-32 bg-[#D91E2E] mx-auto mb-6 rounded-full"
+          />
+
+          {/* Titulación con sombra */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={loaded ? { opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="font-mono text-sm md:text-base mb-8 text-gray-200 mx-auto max-w-md" // Añadido mx-auto
+            transition={{ duration: 0.8, delay: 1.2 }}
+            className="text-2xl md:text-3xl text-[#DBC078] font-medium mb-8 [text-shadow:_0_2px_4px_rgb(0_0_0_/_0.8)]"
           >
-            Soluciones legales personalizadas con enfoque estratégico y atención detallada.
+            Abogado Especializado
           </motion.p>
 
-          {/* Botón */}
-          <motion.a
-            href="#contacto"
-            initial={{ scale: 0.95, opacity: 0 }}
-            animate={loaded ? { scale: 1, opacity: 1 } : {}}
-            transition={{ 
-              type: "spring",
-              stiffness: 100,
-              damping: 10,
-              delay: 1.1
-            }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            className="font-mono text-sm md:text-base border border-[#DBC078] text-[#DBC078] hover:bg-[#DBC078] hover:text-gray-900 px-6 py-3 inline-block transition-colors duration-300 bg-white bg-opacity-10"
+          {/* Descripción con fondo semitransparente */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={loaded ? { opacity: 1 } : {}}
+            transition={{ duration: 0.8, delay: 1.5 }}
+            className="inline-block bg-[#593134]/90 backdrop-blur-sm px-8 py-5 rounded-lg mb-12 border border-[#592533]"
           >
-            CONSULTA INICIAL
-          </motion.a>
+            <p className="text-lg md:text-xl text-[#F2F2F2] leading-relaxed">
+              Soluciones legales personalizadas con enfoque estratégico
+            </p>
+          </motion.div>
+
+          {/* Botones con mejor jerarquía */}
+          <motion.div
+            className="flex flex-col sm:flex-row justify-center gap-6"
+            initial={{ opacity: 0 }}
+            animate={loaded ? { opacity: 1 } : {}}
+            transition={{ duration: 0.8, delay: 1.8 }}
+          >
+            <motion.a
+              href="#contacto"
+              whileHover={{ 
+                scale: 1.05,
+                backgroundColor: '#D91E2E',
+                boxShadow: '0 4px 12px rgba(217, 30, 46, 0.4)'
+              }}
+              whileTap={{ scale: 0.98 }}
+              className="px-10 py-4 bg-[#DBC078] text-[#593134] font-bold rounded-lg border-2 border-[#DBC078] transition-all text-lg hover:shadow-lg"
+            >
+              CONSULTA INICIAL
+            </motion.a>
+
+            <motion.a
+              href="#servicios"
+              whileHover={{ 
+                scale: 1.05,
+                backgroundColor: 'rgba(217, 30, 46, 0.2)',
+                borderColor: '#D91E2E',
+                boxShadow: '0 4px 12px rgba(217, 30, 46, 0.2)'
+              }}
+              whileTap={{ scale: 0.98 }}
+              className="px-10 py-4 text-[#F2F2F2] font-bold rounded-lg border-2 border-[#DBC078] transition-all text-lg hover:shadow-lg"
+            >
+              SERVICIOS LEGALES
+            </motion.a>
+          </motion.div>
         </motion.div>
       </div>
 
-      {/* Efecto de partículas */}
-      <motion.div 
-        className="absolute inset-0 pointer-events-none z-0"
-        initial={{ opacity: 0 }}
-        animate={loaded ? { opacity: 0.03 } : {}}
-        transition={{ duration: 1.5, delay: 1.5 }}
-      >
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute bg-[#DBC078] rounded-full"
-            style={{
-              width: Math.random() * 5 + 2 + 'px',
-              height: Math.random() * 5 + 2 + 'px',
-              left: Math.random() * 100 + '%',
-              top: Math.random() * 100 + '%',
-            }}
-            animate={{
-              y: [0, (Math.random() - 0.5) * 40],
-              x: [0, (Math.random() - 0.5) * 30],
-              opacity: [0.3, 0],
-            }}
-            transition={{
-              duration: Math.random() * 10 + 10,
-              repeat: Infinity,
-              repeatType: "reverse",
-              delay: Math.random() * 5,
-            }}
-          />
-        ))}
-      </motion.div>
+      {/* Elemento decorativo inferior - versión segura */}
+      {loaded && (
+        <motion.div 
+          className="absolute bottom-0 left-0 right-0 h-2 bg-[#DBC078] z-20"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1.2, delay: 2.1 }}
+        />
+      )}
+
+      {/* Partículas mejoradas con referencia y render condicional */}
+      {loaded && (
+        <motion.div 
+          ref={particlesContainerRef}
+          className="absolute inset-0 pointer-events-none z-0 overflow-hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.15 }}
+          transition={{ duration: 1.5, delay: 2.4 }}
+        >
+          {[...Array(25)].map((_, i) => (
+            <motion.div
+              key={`particle-${i}`}
+              className="absolute bg-[#DBC078] rounded-full"
+              style={{
+                width: `${Math.random() * 8 + 3}px`,
+                height: `${Math.random() * 8 + 3}px`,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, (Math.random() - 0.5) * 120],
+                x: [0, (Math.random() - 0.5) * 60],
+                opacity: [0.6, 0],
+              }}
+              transition={{
+                duration: Math.random() * 15 + 15,
+                repeat: Infinity,
+                repeatType: "reverse",
+                delay: Math.random() * 5,
+              }}
+            />
+          ))}
+        </motion.div>
+      )}
     </motion.section>
   );
 };
+
 export default HeroSection;

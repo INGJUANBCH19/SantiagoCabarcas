@@ -1,21 +1,124 @@
-#root {
-  max-width: 120%;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Reset completo */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+html, body, #root {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Estructura principal */
+#root {
+  display: flex;
+  flex-direction: column;
+  background-color: #F2F2F2; /* light */
+  color: #2D1E1F; /* dark */
+}
+
+/* Header */
+.header-container {
+  width: 100%;
+  padding: 0;
+}
+
+/* Secciones */
+.section-container {
+  width: 100%;
+  padding: 5rem 0;
+}
+
+/* Contenedores internos */
+.container {
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Componentes específicos */
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #D91E2Eaa); /* accent con transparencia */
 }
+
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em #DBC078aa); /* gold con transparencia */
+}
+
+.card {
+  padding: 2em;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(89, 49, 52, 0.1);
+  border: 1px solid #592533; /* secondary */
+  width: 100%;
+}
+
+/* Tipografía y colores */
+.read-the-docs {
+  color: #593134; /* primary */
+}
+
+.highlight {
+  color: #DBC078; /* gold */
+}
+
+.border-accent {
+  border-color: #D91E2E; /* accent */
+}
+
+/* Botones */
+.btn-primary {
+  background-color: #D91E2E; /* accent */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 300ms;
+  border: none;
+  cursor: pointer;
+  width: auto;
+}
+
+.btn-primary:hover {
+  background-color: #E84C3D; /* accent-light */
+}
+
+.btn-secondary {
+  background-color: #593134; /* primary */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 300ms;
+  border: none;
+  cursor: pointer;
+  width: auto;
+}
+
+.btn-secondary:hover {
+  background-color: #592533; /* secondary */
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 @keyframes logo-spin {
@@ -33,10 +136,14 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+/* Responsive */
+@media (max-width: 768px) {
+  .section-container {
+    padding: 3rem 0;
+  }
+  
+  .logo {
+    height: 4em;
+    padding: 1em;
+  }
 }

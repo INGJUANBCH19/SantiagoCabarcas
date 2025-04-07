@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // Añadimos el import de useState
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaPaperPlane, FaUser, FaEnvelope, FaPhone, FaFileAlt } from 'react-icons/fa';
 
@@ -40,7 +40,7 @@ const ContactForm = () => {
   };
 
   return (
-    <section className="py-20 bg-gray-50" id="contacto">
+    <section className="py-20 bg-[#F2F2F2]" id="contacto"> {/* Light background */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -49,10 +49,10 @@ const ContactForm = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-800 mb-4">
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#593134] mb-4"> {/* Primary text */}
             Contacto
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-[#592533] max-w-2xl mx-auto"> {/* Secondary text */}
             Complete el formulario y nos pondremos en contacto a la brevedad
           </p>
         </motion.div>
@@ -62,7 +62,7 @@ const ContactForm = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
-          className="bg-white rounded-xl shadow-lg overflow-hidden"
+          className="bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-[#D91E2E]" /* Accent border */
         >
           <form onSubmit={handleSubmit} className="p-8 md:p-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -75,7 +75,7 @@ const ContactForm = () => {
                 className="relative"
               >
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaUser className="text-gray-400" />
+                  <FaUser className="text-[#592533]/70" /> {/* Secondary with opacity */}
                 </div>
                 <input
                   type="text"
@@ -83,7 +83,7 @@ const ContactForm = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="block w-full pl-10 pr-3 py-3 border-b border-gray-300 focus:border-[#DBC078] focus:outline-none bg-transparent"
+                  className="block w-full pl-10 pr-3 py-3 border-b border-[#592533]/30 focus:border-[#DBC078] focus:outline-none bg-transparent placeholder-[#592533]/70"
                   placeholder="Nombre completo"
                 />
               </motion.div>
@@ -97,7 +97,7 @@ const ContactForm = () => {
                 className="relative"
               >
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaEnvelope className="text-gray-400" />
+                  <FaEnvelope className="text-[#592533]/70" />
                 </div>
                 <input
                   type="email"
@@ -105,7 +105,7 @@ const ContactForm = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="block w-full pl-10 pr-3 py-3 border-b border-gray-300 focus:border-[#DBC078] focus:outline-none bg-transparent"
+                  className="block w-full pl-10 pr-3 py-3 border-b border-[#592533]/30 focus:border-[#DBC078] focus:outline-none bg-transparent placeholder-[#592533]/70"
                   placeholder="Correo electrónico"
                 />
               </motion.div>
@@ -119,14 +119,14 @@ const ContactForm = () => {
                 className="relative"
               >
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaPhone className="text-gray-400" />
+                  <FaPhone className="text-[#592533]/70" />
                 </div>
                 <input
                   type="tel"
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="block w-full pl-10 pr-3 py-3 border-b border-gray-300 focus:border-[#DBC078] focus:outline-none bg-transparent"
+                  className="block w-full pl-10 pr-3 py-3 border-b border-[#592533]/30 focus:border-[#DBC078] focus:outline-none bg-transparent placeholder-[#592533]/70"
                   placeholder="Teléfono (opcional)"
                 />
               </motion.div>
@@ -140,7 +140,7 @@ const ContactForm = () => {
                 className="relative"
               >
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaFileAlt className="text-gray-400" />
+                  <FaFileAlt className="text-[#592533]/70" />
                 </div>
                 <input
                   type="text"
@@ -148,7 +148,7 @@ const ContactForm = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="block w-full pl-10 pr-3 py-3 border-b border-gray-300 focus:border-[#DBC078] focus:outline-none bg-transparent"
+                  className="block w-full pl-10 pr-3 py-3 border-b border-[#592533]/30 focus:border-[#DBC078] focus:outline-none bg-transparent placeholder-[#592533]/70"
                   placeholder="Asunto"
                 />
               </motion.div>
@@ -168,7 +168,7 @@ const ContactForm = () => {
                 onChange={handleChange}
                 required
                 rows="5"
-                className="block w-full px-4 py-3 border-b border-gray-300 focus:border-[#DBC078] focus:outline-none bg-transparent resize-none"
+                className="block w-full px-4 py-3 border-b border-[#592533]/30 focus:border-[#DBC078] focus:outline-none bg-transparent resize-none placeholder-[#592533]/70"
                 placeholder="Su mensaje..."
               ></textarea>
             </motion.div>
@@ -184,7 +184,7 @@ const ContactForm = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`inline-flex items-center px-8 py-3 rounded-full font-medium text-white ${isSubmitting ? 'bg-gray-400' : 'bg-[#DBC078] hover:bg-[#c9a95a]'} transition-colors duration-300 shadow-md`}
+                className={`inline-flex items-center px-8 py-3 rounded-full font-medium text-[#593134] ${isSubmitting ? 'bg-[#DBC078]/50' : 'bg-[#DBC078] hover:bg-[#DBC078]/90'} transition-colors duration-300 shadow-md border-2 border-[#DBC078]`}
               >
                 {isSubmitting ? (
                   'Enviando...'
@@ -202,7 +202,7 @@ const ContactForm = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mt-6 p-4 bg-green-50 text-green-700 rounded-lg text-center"
+                className="mt-6 p-4 bg-[#D91E2E]/10 text-[#D91E2E] rounded-lg text-center border border-[#D91E2E]/20"
               >
                 ¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.
               </motion.div>
