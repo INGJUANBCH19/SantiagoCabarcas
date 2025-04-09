@@ -48,7 +48,7 @@ export const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-[#F2F2F2] mb-4 leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
           >
-            Santiago Cabarcas
+            Santiago Ruiz Cabarcas
           </motion.h1>
 
           {/* Línea divisoria acentuada */}
@@ -77,7 +77,8 @@ export const HeroSection = () => {
             className="inline-block bg-[#593134]/90 backdrop-blur-sm px-8 py-5 rounded-lg mb-12 border border-[#592533]"
           >
             <p className="text-lg md:text-xl text-[#F2F2F2] leading-relaxed">
-              Soluciones legales personalizadas con enfoque estratégico
+            "Compromiso legal con experiencia, ética y atención personalizada."
+
             </p>
           </motion.div>
 
