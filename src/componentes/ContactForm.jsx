@@ -13,6 +13,7 @@ const ContactForm = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,25 +23,51 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError('');
     
-    // Simular envío
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setSubmitSuccess(true);
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: ''
-    });
-    
-    setTimeout(() => setSubmitSuccess(false), 5000);
+    try {
+      const response = await fetch('https://formspree.io/f/xnnplvwo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          subject: formData.subject,
+          message: formData.message,
+          _replyto: formData.email, // Para que Formspree sepa dónde responder
+          _subject: `Nuevo mensaje de contacto: ${formData.subject}` // Asunto personalizado
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al enviar el mensaje');
+      }
+
+      setSubmitSuccess(true);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Error:', error);
+      setSubmitError('Ocurrió un error al enviar el mensaje. Por favor, inténtelo de nuevo más tarde.');
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => {
+        setSubmitSuccess(false);
+        setSubmitError('');
+      }, 5000);
+    }
   };
 
   return (
-    <section className="py-20 bg-[#F2F2F2]" id="contacto"> {/* Light background */}
+    <section className="py-20 bg-[#F2F2F2]" id="contacto">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -49,10 +76,10 @@ const ContactForm = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#593134] mb-4"> {/* Primary text */}
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#593134] mb-4">
             Contacto
           </h2>
-          <p className="text-xl text-[#592533] max-w-2xl mx-auto"> {/* Secondary text */}
+          <p className="text-xl text-[#592533] max-w-2xl mx-auto">
             Complete el formulario y nos pondremos en contacto a la brevedad
           </p>
         </motion.div>
@@ -62,7 +89,7 @@ const ContactForm = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
-          className="bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-[#D91E2E]" /* Accent border */
+          className="bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-[#D91E2E]"
         >
           <form onSubmit={handleSubmit} className="p-8 md:p-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -75,7 +102,7 @@ const ContactForm = () => {
                 className="relative"
               >
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaUser className="text-[#592533]/70" /> {/* Secondary with opacity */}
+                  <FaUser className="text-[#592533]/70" />
                 </div>
                 <input
                   type="text"
@@ -197,12 +224,23 @@ const ContactForm = () => {
               </button>
             </motion.div>
 
+            {/* Mensaje de error */}
+            {submitError && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-6 p-4 bg-red-100 text-red-700 rounded-lg text-center border border-red-200"
+              >
+                {submitError}
+              </motion.div>
+            )}
+
             {/* Mensaje de éxito */}
             {submitSuccess && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mt-6 p-4 bg-[#D91E2E]/10 text-[#D91E2E] rounded-lg text-center border border-[#D91E2E]/20"
+                className="mt-6 p-4 bg-green-100 text-green-700 rounded-lg text-center border border-green-200"
               >
                 ¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.
               </motion.div>

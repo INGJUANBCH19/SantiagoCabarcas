@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { FaBalanceScale, FaGavel, FaBook, FaUserTie } from 'react-icons/fa';
 
 const AboutSection = () => {
   const CASES_TOTAL = 500;
   const SUCCESS_RATE = 95;
   const EXPERIENCE_YEARS = 4;
+  const SPECIALTIES = ['Derecho Penal', 'Derecho Procesal', 'Derecho Civil', 'Derecho Laboral'];
   
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -13,25 +15,10 @@ const AboutSection = () => {
   });
 
   const controls = useAnimation();
-  const [casesDisplayed, setCasesDisplayed] = useState(0);
 
   useEffect(() => {
     if (inView) {
       controls.start("visible");
-      
-      // Animación de conteo para casos atendidos
-      let start = 0;
-      const end = CASES_TOTAL;
-      const duration = 2000;
-      const incrementTime = duration / end;
-
-      const timer = setInterval(() => {
-        start += 1;
-        setCasesDisplayed(start);
-        if (start >= end) clearInterval(timer);
-      }, incrementTime);
-
-      return () => clearInterval(timer);
     }
   }, [controls, inView]);
 
@@ -62,15 +49,14 @@ const AboutSection = () => {
                   stiffness: 260,
                   damping: 20
                 }}
-                className="absolute -bottom-4 -right-4 bg-[#DBC078] text-[#593134] font-bold text-xl px-6 py-3 rounded-lg shadow-lg border-2 border-white"
+                className="absolute -bottom-4 -right-4 bg-[#593134] text-[#F2F2F2] font-bold text-xl px-6 py-3 rounded-lg shadow-lg border-2 border-[#DBC078] flex items-center"
               >
+                <FaUserTie className="mr-2" />
                 +{EXPERIENCE_YEARS} años
               </motion.div>
 
-              <div className="absolute top-0 right-0 w-16 h-16 bg-[#D91E2E] clip-corner">
-                <div className="absolute top-1 right-1 text-white text-xs font-bold transform rotate-45">
-                  EXPERTO
-                </div>
+              <div className="absolute top-0 right-0 w-16 h-16 bg-[#D91E2E] clip-corner flex items-center justify-center">
+                <FaBalanceScale className="text-white text-xl transform rotate-45" />
               </div>
             </div>
           </motion.div>
@@ -85,127 +71,180 @@ const AboutSection = () => {
             <div className="relative">
               <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#593134] mb-6 relative inline-block">
                 <span className="relative z-10">Sobre </span>
-                <span className="text-[#DBC078] relative z-10">Santiago Cabarcas</span>
-                <span className="absolute -bottom-2 left-0 w-full h-2 bg-[#D91E2E]/30 z-0"></span>
+                <span className="text-[#D91E2E] relative z-10">Santiago Ruiz Cabarcas</span>
+                <span className="absolute -bottom-2 left-0 w-full h-2 bg-[#DBC078]/50 z-0"></span>
               </h2>
             </div>
 
             <div className="space-y-6 mb-10">
-              <p className="text-lg text-[#592533] leading-relaxed border-l-4 border-[#DBC078] pl-4">
-                SANTIAGO RUIZ CABARCAS Abogados Consultores y Litigantes es
-                una firma jurídica especializada en ofrecer soluciones integrales y
-                personalizadas en diversas áreas del derecho, liderada por Santiago
-                De Jesús Ruiz Cabarcas, abogado graduado de la Universidad
-                Pontificia Bolivariana, especialista en Derecho Penal de la
-                Universidad del Rosario y estudiante de la especialización en
-                Derecho Procesal Penal, en la Universidad Externado de Colombia. 
+              <p className="text-lg text-[#592533] leading-relaxed border-l-4 border-[#D91E2E] pl-4">
+                <FaBook className="inline-block mr-2 text-[#DBC078]" />
+                Abogado especialista con formación en la <strong>Universidad Pontificia Bolivariana</strong> y <strong>Universidad del Rosario</strong>. Mi enfoque combina el rigor académico con la experiencia práctica en el sistema judicial colombiano.
               </p>
               
-              <p className="text-lg text-[#592533] leading-relaxed bg-[#F2F2F2] p-4 rounded-lg">
-                Con más de {EXPERIENCE_YEARS} años de experiencia en el ejercicio profesional. Con una sólida trayectoria en reconocidas firmas, entidades públicas
-                y asociaciones jurídicas, la firma combina profesionalismo, ética y
-                sensibilidad humana para proteger los derechos e intereses de sus
-                clientes.
-              </p>
-              
-              <div className="relative group">
-                <p className="text-lg text-[#592533] leading-relaxed relative z-10">
-                  Mi enfoque se basa en la atención personalizada, la transparencia y la búsqueda constante de la excelencia profesional.
-                </p>
-                <div className="absolute inset-0 bg-[#DBC078]/10 rounded-lg -z-10 group-hover:bg-[#DBC078]/20 transition-all duration-300"></div>
+              <div className="bg-[#F2F2F2] p-4 rounded-lg border border-[#E8E8E8]">
+                <h4 className="font-bold text-[#593134] mb-2 flex items-center">
+                  <FaGavel className="mr-2 text-[#D91E2E]" />
+                  Especialidades:
+                </h4>
+                <div className="grid grid-cols-2 gap-2">
+                  {SPECIALTIES.map((especialidad, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0 }}
+                      animate={inView ? { opacity: 1 } : {}}
+                      transition={{ delay: 0.3 + index * 0.1 }}
+                      className="flex items-center"
+                    >
+                      <div className="w-2 h-2 bg-[#D91E2E] rounded-full mr-2"></div>
+                      <span className="text-[#592533]">{especialidad}</span>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
+              
+              <p className="text-lg text-[#592533] leading-relaxed">
+                Mi práctica se fundamenta en tres pilares: <strong className="text-[#D91E2E]">ética profesional</strong>, <strong className="text-[#D91E2E]">estrategia legal personalizada</strong> y <strong className="text-[#D91E2E]">compromiso con los resultados</strong>. Cada caso recibe atención individualizada y un análisis exhaustivo.
+              </p>
             </div>
             
-            {/* Sección de estadísticas mejorada */}
+            {/* Sección de estadísticas profesionales */}
             <motion.div 
               initial="hidden"
               animate={controls}
               variants={containerVariants}
               className="mt-12"
             >
-              <h3 className="text-xl font-bold text-[#593134] mb-8 text-center">Resultados que hablan por sí solos</h3>
+              <h3 className="text-xl font-bold text-[#593134] mb-8 text-center border-b border-[#DBC078] pb-2">
+                Trayectoria Profesional
+              </h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Casos atendidos - Versión mejorada */}
+                {/* Experiencia en casos */}
                 <motion.div 
                   variants={itemVariants}
-                  className="bg-[#F8F8F8] p-6 rounded-xl border border-[#E8E8E8] relative overflow-hidden"
+                  className="bg-white p-6 rounded-xl shadow-md border-t-4 border-[#D91E2E] relative overflow-hidden"
                 >
-                  <div className="flex items-center justify-between mb-4 z-10 relative">
-                    <h4 className="text-lg font-semibold text-[#593134]">Casos atendidos</h4>
-                    <div className="w-10 h-10 bg-[#D91E2E] rounded-full flex items-center justify-center">
-                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
-                    </div>
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="text-lg font-semibold text-[#593134] flex items-center">
+                      <FaBalanceScale className="mr-2 text-[#D91E2E]" />
+                      Casos atendidos
+                    </h4>
                   </div>
                   
-                  {/* Número siempre visible */}
-                  <div className="flex items-end z-10 relative">
-                    <motion.span 
-                      className="text-4xl font-bold text-[#593134]"
-                      variants={counterVariants}
-                    >
-                      {casesDisplayed}
-                    </motion.span>
-                    <span className="text-2xl text-[#D91E2E] font-medium ml-2">+</span>
-                  </div>
-                  
-                  {/* Documentos animados (ahora detrás del texto) */}
-                  <div className="absolute bottom-2 right-2 z-0 opacity-30">
-                    <DocumentStack count={3} />
-                  </div>
-                  
-                  <div className="mt-4 h-2 bg-[#E8E8E8] rounded-full overflow-hidden z-10 relative">
+                  <div className="relative h-24 mb-4">
                     <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: '100%' }}
-                      transition={{ duration: 2, delay: 0.5 }}
-                      className="h-full bg-[#DBC078]"
-                    />
+                      initial={{ opacity: 0 }}
+                      animate={controls}
+                      variants={{
+                        visible: {
+                          opacity: 1,
+                          transition: {
+                            staggerChildren: 0.1,
+                            delayChildren: 0.3
+                          }
+                        }
+                      }}
+                      className="absolute inset-0 flex items-end"
+                    >
+                      {/* Gráfico de barras animado */}
+                      {[60, 80, 100, 90, 70, 50, 80, 60].map((height, i) => (
+                        <motion.div
+                          key={i}
+                          variants={barVariants}
+                          className={`w-8 mx-1 ${i % 2 === 0 ? 'bg-[#593134]' : 'bg-[#DBC078]'} rounded-t-sm`}
+                          style={{ height: `${height}%` }}
+                        />
+                      ))}
+                    </motion.div>
+                  </div>
+                  
+                  <div className="text-center">
+                    <span className="text-3xl font-bold text-[#593134]">{CASES_TOTAL}+</span>
+                    <p className="text-[#592533] mt-2">Procesos legales gestionados con excelencia</p>
                   </div>
                 </motion.div>
                 
-                {/* Tasa de éxito - Versión mejorada */}
+                {/* Tasa de éxito */}
                 <motion.div 
                   variants={itemVariants}
-                  className="bg-[#F8F8F8] p-6 rounded-xl border border-[#E8E8E8]"
+                  className="bg-white p-6 rounded-xl shadow-md border-t-4 border-[#DBC078]"
                 >
                   <div className="flex items-center justify-between mb-4">
-                    <h4 className="text-lg font-semibold text-[#593134]">Tasa de éxito</h4>
-                    <div className="w-10 h-10 bg-[#DBC078] rounded-full flex items-center justify-center">
-                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                      </svg>
-                    </div>
+                    <h4 className="text-lg font-semibold text-[#593134] flex items-center">
+                      <FaGavel className="mr-2 text-[#DBC078]" />
+                      Efectividad legal
+                    </h4>
                   </div>
                   
-                  <div className="flex items-end">
-                    <motion.span 
-                      className="text-4xl font-bold text-[#593134]"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 1.5 }}
+                  <div className="relative h-24 flex items-center justify-center">
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.8 }}
+                      className="relative w-20 h-20"
                     >
-                      {SUCCESS_RATE}
-                    </motion.span>
-                    <span className="text-2xl text-[#D91E2E] font-medium ml-2">%</span>
+                      <svg className="w-full h-full" viewBox="0 0 36 36">
+                        <path
+                          d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                          fill="none"
+                          stroke="#E8E8E8"
+                          strokeWidth="3"
+                        />
+                        <motion.path
+                          d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                          fill="none"
+                          stroke="#D91E2E"
+                          strokeWidth="3"
+                          strokeDasharray="100, 100"
+                          initial={{ strokeDashoffset: 100 }}
+                          animate={{ strokeDashoffset: 100 - SUCCESS_RATE }}
+                          transition={{ duration: 2, delay: 0.5 }}
+                        />
+                      </svg>
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.5 }}
+                        className="absolute inset-0 flex items-center justify-center text-[#593134] font-bold text-xl"
+                      >
+                        {SUCCESS_RATE}%
+                      </motion.div>
+                    </motion.div>
                   </div>
                   
-                  <div className="mt-4 flex items-center">
-                    {[...Array(5)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.7 + i * 0.1 }}
-                        className={`w-6 h-6 rounded-full ${i < Math.floor(SUCCESS_RATE / 20) ? 'bg-[#DBC078]' : 'bg-[#E8E8E8]'} mx-1`}
-                      />
-                    ))}
-                    <span className="text-sm text-[#592533] ml-2">({SUCCESS_RATE} de cada 100 casos)</span>
+                  <div className="text-center mt-4">
+                    <p className="text-[#592533]">
+                      Tasa de éxito en resoluciones favorables
+                    </p>
+                    <div className="flex justify-center mt-2">
+                      {[...Array(5)].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, scale: 0.5 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.7 + i * 0.1 }}
+                          className={`w-4 h-4 rounded-full ${i < Math.floor(SUCCESS_RATE / 20) ? 'bg-[#D91E2E]' : 'bg-[#E8E8E8]'} mx-1`}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </motion.div>
               </div>
+
+              {/* Frase destacada */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.5 }}
+                className="mt-12 text-center italic text-[#592533] text-lg border-t border-[#DBC078] pt-6"
+              >
+                "En el derecho, cada caso es único. Mi compromiso es brindar soluciones legales <span className="text-[#D91E2E]">estratégicas</span> y <span className="text-[#D91E2E]">personalizadas</span> que protejan sus derechos e intereses."
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>
@@ -244,45 +283,15 @@ const itemVariants = {
   }
 };
 
-const counterVariants = {
-  hidden: { opacity: 0 },
+const barVariants = {
+  hidden: { height: 0 },
   visible: {
-    opacity: 1,
+    height: "100%",
     transition: {
-      duration: 1
+      duration: 0.8,
+      ease: "backOut"
     }
   }
-};
-
-// Componente de pila de documentos (modificado para estar en el fondo)
-const DocumentStack = ({ count }) => {
-  return (
-    <div className="relative w-24 h-20">
-      {[...Array(count)].map((_, i) => (
-        <motion.div
-          key={i}
-          initial={{ y: 10, rotate: -2 + Math.random() * 4 }}
-          animate={{ 
-            y: 0,
-            transition: {
-              delay: 0.5 + i * 0.1,
-              duration: 0.5
-            }
-          }}
-          className={`absolute w-full h-full bg-white border ${i % 2 ? 'border-[#DBC078]' : 'border-[#593134]'} shadow-sm`}
-          style={{
-            zIndex: count - i,
-            top: `${i * 4}px`,
-            left: `${i * 2}px`
-          }}
-        >
-          <div className="absolute top-2 left-3 w-6 h-1 bg-[#E8E8E8]"></div>
-          <div className="absolute top-4 left-3 w-10 h-1 bg-[#E8E8E8]"></div>
-          <div className="absolute top-6 left-3 w-8 h-1 bg-[#E8E8E8]"></div>
-        </motion.div>
-      ))}
-    </div>
-  );
 };
 
 export default AboutSection;

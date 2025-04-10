@@ -10,7 +10,7 @@ const testimonials = [
     id: 1,
     name: "María González",
     position: "Directora de Empresa",
-    image: "/clientes/cliente1.jpg",
+    image: "/images/clientes/p1.jpeg",
     testimonio: "El servicio legal recibido fue excepcional. Resolvieron mi caso de manera rápida y profesional.",
     rating: 5
   },
@@ -18,7 +18,7 @@ const testimonials = [
     id: 2,
     name: "Carlos Rodríguez",
     position: "Empresario",
-    image: "/clientes/cliente2.jpg",
+    image: "/images/clientes/p3.jpeg",
     testimonio: "Asesoramiento preciso y trato cercano. Recomiendo sus servicios sin duda alguna.",
     rating: 4.5
   },
@@ -26,7 +26,7 @@ const testimonials = [
     id: 3,
     name: "Ana Martínez",
     position: "Gerente Financiera",
-    image: "/clientes/cliente3.jpg",
+    image: "/images/clientes/p2.jpeg",
     testimonio: "Solucionaron un complejo problema contractual con excelentes resultados para nuestra empresa.",
     rating: 5
   },
@@ -34,7 +34,7 @@ const testimonials = [
     id: 4,
     name: "Jorge Pérez",
     position: "Emprendedor",
-    image: "/clientes/cliente4.jpg",
+    image: "/images/clientes/p4.jpeg",
     testimonio: "Encontré exactamente el apoyo legal que necesitaba para mi startup. Muy satisfecho.",
     rating: 4
   },
@@ -42,7 +42,7 @@ const testimonials = [
     id: 5,
     name: "Lucía Fernández",
     position: "Directora de RRHH",
-    image: "/clientes/cliente5.jpg",
+    image: "/images/clientes/p5.png",
     testimonio: "Manejo impecable de nuestro caso laboral. Profesionales altamente capacitados.",
     rating: 5
   }

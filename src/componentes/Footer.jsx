@@ -1,24 +1,34 @@
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 
 const Footer = () => {
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   return (
-    <footer className="bg-[#593134] text-[#F2F2F2] pt-16 pb-8 w-full"> {/* primary y light */}
+    <footer className="bg-[#593134] text-[#F2F2F2] pt-16 pb-8 w-full">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           
           {/* Columna Logo */}
           <div className="md:col-span-1">
             <div className="flex items-center mb-4">
-              <div className="rounded-full overflow-hidden border-2 border-[#DBC078] p-1.5 bg-white mr-4"> {/* gold */}
+              <div className="rounded-full overflow-hidden border-2 border-[#DBC078] p-1.5 bg-white mr-4">
                 <img src="/SC.png" alt="Logo" className="h-12 w-auto object-cover"/>
               </div>
-              <h3 className="text-xl font-serif">Santiago Cabarcas</h3>
+              <h3 className="text-xl font-serif">Santiago Ruiz Cabarcas</h3>
             </div>
-            <p className="text-[#F2F2F2]/80 mb-4"> {/* light con opacidad */}
+            <p className="text-[#F2F2F2]/80 mb-4">
               Soluciones legales personalizadas.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-[#F2F2F2]/80 hover:text-[#DBC078] transition"> {/* gold en hover */}
+              <a href="#" className="text-[#F2F2F2]/80 hover:text-[#DBC078] transition">
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                   <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd"/>
                 </svg>
@@ -33,16 +43,32 @@ const Footer = () => {
 
           {/* Enlaces rápidos */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-[#DBC078]">Enlaces Rápidos</h3> {/* gold */}
+            <h3 className="text-lg font-semibold mb-4 text-[#DBC078]">Enlaces Rápidos</h3>
             <ul className="space-y-2">
-              {['Inicio', 'Servicios', 'Sobre Mí', 'Testimonios', 'Contacto'].map((item) => (
-                <li key={item}>
-                  <a href={`#${item.toLowerCase().replace(' ', '-')}`} 
-                     className="text-[#F2F2F2]/80 hover:text-[#F2F2F2] transition"> {/* light */}
-                    {item}
-                  </a>
-                </li>
-              ))}
+              {['Inicio', 'Servicios', 'Sobre Mí', 'Testimonios', 'Contacto'].map((item) => {
+                const id = item.toLowerCase().replace(' ', '-');
+                return (
+                  <li key={item}>
+                    <a 
+                      href={`#${id}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (item === 'Inicio') {
+                          window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                          });
+                        } else {
+                          scrollToSection(id);
+                        }
+                      }}
+                      className="text-[#F2F2F2]/80 hover:text-[#F2F2F2] transition"
+                    >
+                      {item}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
@@ -65,21 +91,27 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4 text-[#DBC078]">Contacto</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
-                <FaPhone className="mt-1 mr-3 text-[#D91E2E]"/> {/* accent */}
+                <FaPhone className="mt-1 mr-3 text-[#D91E2E]"/>
                 <div>
-                  <p className="text-[#F2F2F2]">+57 300 123 4567</p>
+                  <p className="text-[#F2F2F2]">+57 (312) 795-3716</p>
                   <p className="text-sm text-[#F2F2F2]/60">Lunes a Viernes: 8am - 6pm</p>
                 </div>
               </li>
               <li className="flex items-start">
                 <FaEnvelope className="mt-1 mr-3 text-[#D91E2E]"/>
-                <a href="mailto:contacto@ejemplo.com" className="text-[#F2F2F2]/80 hover:text-[#F2F2F2] transition">
-                  contacto@ejemplo.com
+                <a href="mailto:SANTIAGO.RUIZCABARCAS@outlook.com" className="text-[#F2F2F2]/80 hover:text-[#F2F2F2] transition">
+                  SANTIAGO.RUIZCABARCAS@outlook.com
                 </a>
               </li>
               <li className="flex items-start">
                 <FaMapMarkerAlt className="mt-1 mr-3 text-[#D91E2E]"/>
-                <address className="text-[#F2F2F2]/80 not-italic">Calle 123 #45-67, Bogotá</address>
+                <address className="text-[#F2F2F2]/80 not-italic">CALLE 81#11-68 OFICINA 402 EDIFICIO CENTRO EJECUTIVO I BOGOTA</address>
+                
+              </li>
+              <li className="flex items-start">
+                <FaMapMarkerAlt className="mt-1 mr-3 text-[#D91E2E]"/>
+               
+                <address className="text-[#F2F2F2]/80 not-italic">CALLE 31#4-47 OFICINA 504 EDIFICIO CENTRO EJECUTIVO MONTERIA</address>
               </li>
               <li className="flex items-start">
                 <FaClock className="mt-1 mr-3 text-[#D91E2E]"/>
@@ -94,18 +126,11 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-[#592533] mt-12 pt-8"> {/* secondary */}
+        <div className="border-t border-[#592533] mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-[#F2F2F2]/60 text-sm mb-4 md:mb-0">
-              © {new Date().getFullYear()} Santiago Cabarcas. Todos los derechos reservados.
+              © {new Date().getFullYear()} Santiago Ruiz Cabarcas. Todos los derechos reservados.
             </p>
-            <div className="flex space-x-6">
-              {['Términos', 'Privacidad', 'Aviso legal'].map((item) => (
-                <a key={item} href="#" className="text-[#F2F2F2]/60 hover:text-[#F2F2F2] text-sm transition">
-                  {item}
-                </a>
-              ))}
-            </div>
           </div>
         </div>
       </div>

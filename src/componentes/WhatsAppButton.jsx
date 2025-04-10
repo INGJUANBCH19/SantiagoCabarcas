@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 
 const WhatsAppButton = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const phoneNumber = '573001234567'; // Reemplaza con el número real
-  const message = 'Hola, estoy interesado en una consulta legal'; // Mensaje predeterminado
+  const phoneNumber = '3127953716'; // Reemplaza con el número real
+  const message = 'Hola, estoy interesado/a en una consulta legal'; // Mensaje predeterminado
 
   useEffect(() => {
     const toggleVisibility = () => {

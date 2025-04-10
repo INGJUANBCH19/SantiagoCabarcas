@@ -16,11 +16,22 @@ function App() {
       
       <main>
         <WhatsAppButton />
+        <section id="inicio">  {/* ← Este ID debe coincidir */}
         <HeroSection />
-        <ServicesSection />
+      </section>
+      <section id="servicios">  {/* ← Este ID debe coincidir */}
+      <ServicesSection />
+      </section>
+        
+        <section id="sobre-mi">  {/* ← Este ID */}
         <AboutSection />
-        <TestimonialsCarousel />
+      </section>
+      <section id="testimonios">  {/* ← Este ID */}
+        <TestimonialsCarousel  />
+      </section>
+      <section id="contacto">  {/* ← Este ID */}
         <ContactForm />
+      </section>
         <Footer/>
       </main>
 

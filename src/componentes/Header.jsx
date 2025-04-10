@@ -1,31 +1,55 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { FaWhatsapp, FaEnvelope } from 'react-icons/fa';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const headerRef = useRef(null);
+
+  const { scrollY } = useScroll();
 
   useEffect(() => {
     setLoaded(true);
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious();
+    
+    // Si el scroll es hacia abajo y pasamos los 100px, ocultamos el header
+    if (latest > previous && latest > 100) {
+      setHidden(true);
+    } 
+    // Si el scroll es hacia arriba o estamos en el top, mostramos el header
+    else if (latest < previous || latest <= 100) {
+      setHidden(false);
+    }
+    
+    setLastScrollY(latest);
+    setScrolled(latest > 10);
+  });
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
 
   return (
     <motion.header 
+      ref={headerRef}
       initial={{ y: -20, opacity: 0 }}
       animate={loaded ? { 
-        y: 0, 
+        y: hidden ? -100 : 0,
         opacity: 1,
         backgroundColor: scrolled ? 'rgba(89, 49, 52, 0.95)' : 'rgba(89, 49, 52, 0.7)',
         backdropFilter: scrolled ? 'blur(8px)' : 'blur(4px)',
-        boxShadow: scrolled ? '0 4px 12px rgba(0, 0, 0, 0.1)' : 'none'
+        boxShadow: scrolled ? '0 4px 12px rgba(0, 0, 0, 0.1)' : 'none',
+        transition: { type: 'spring', damping: 15, stiffness: 200 }
       } : {}}
-      transition={{ duration: 0.5 }}
       className="fixed w-full top-0 z-50"
     >
       <div className="max-w-[1800px] mx-auto px-6">
@@ -63,6 +87,12 @@ const Header = () => {
                 <motion.a
                   key={item}
                   href={`#${item.toLowerCase()}`}
+                  onClick={(e) => {
+                    if (item === 'Inicio') {
+                      e.preventDefault();
+                      scrollToTop();
+                    }
+                  }}
                   initial={{ y: -10, opacity: 0 }}
                   animate={loaded ? { y: 0, opacity: 1 } : {}}
                   transition={{ 
@@ -89,7 +119,7 @@ const Header = () => {
             className="flex items-center gap-3"
           >
             <motion.a
-              href="https://wa.me/57300XXXXXXX"
+              href="https://wa.me/3127953716"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ 
@@ -103,7 +133,7 @@ const Header = () => {
             </motion.a>
             
             <motion.a
-              href="mailto:contacto@ejemplo.com"
+              href="mailto:SANTIAGO.RUIZCABARCAS@outlook.com"
               whileHover={{ 
                 scale: 1.1,
                 backgroundColor: 'rgba(219, 192, 120, 0.2)'
@@ -120,8 +150,11 @@ const Header = () => {
       {/* Barra decorativa */}
       <motion.div 
         initial={{ scaleX: 0 }}
-        animate={loaded ? { scaleX: 1 } : {}}
-        transition={{ duration: 0.8, delay: 0.8 }}
+        animate={loaded ? { 
+          scaleX: hidden ? 0 : 1,
+          opacity: hidden ? 0 : 1
+        } : {}}
+        transition={{ duration: 0.3 }}
         className="h-0.5 bg-[#D91E2E] origin-left w-full"
       />
     </motion.header>
