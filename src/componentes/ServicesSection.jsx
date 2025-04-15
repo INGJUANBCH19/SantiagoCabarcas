@@ -5,57 +5,101 @@ import { useInView } from 'react-intersection-observer';
 
 const services = [
   {
+    id:"derecho-penal",
     icon: <FaBalanceScale className="text-4xl text-[#DBC078]" />,
     title: "Derecho Penal",
-    description: "Defensa integral y personalizada para clientes procesados penalmente, partiendo de la presunción de inocencia, y representación de víctimas de delitos para garantizar justicia, reparación y no repetición.",
+    description: (
+    <>
+          <span className="font-semibold text-[#592533]">
+          Protegemos tus derechos con firmeza y compromiso.
+          </span>{" "}
+          Brindamos defensa penal personalizada para personas acusadas, partiendo siempre de la presunción de inocencia. También representamos a víctimas, buscando justicia, reparación y no repetición.
+        </>
+    ),
     backContent: [
-      "-Consultas y Asesorías Jurídicas: Orientación legal en materia penal.",
-      "-Representación en Procesos Judiciales: Acompañamiento en todas las etapas del proceso.",
+      "-Asesoría legal en temas penales.",
+      "-Acompañamiento en todas las etapas del proceso judicial.",
       
-      "-Defensa Penal: Representación de personas acusadas de delitos."
+      "-Defensa penal integral ante acusaciones."
     ]
   },
   {
+    id:"responsabilidad-fiscal",
     icon: <FaHandshake className="text-4xl text-[#DBC078]" />,
-    title: "Derecho Laboral",
-    description: "Defensa en despidos, reclamaciones salariales, acoso laboral.",
+    title: "Responsabilidad Fiscal.",
+    description: (
+      <>
+        <span className="font-semibold text-[#592533]">
+        Te acompañamos en cada etapa del proceso fiscal.
+        </span>{" "}
+        Brindamos defensa y asesoría legal en investigaciones adelantadas por la Contraloría General de la República, protegiendo tus intereses y garantizando el debido proceso.
+      </>
+    ),
     backContent: [
-      "-Contratación y terminación laboral: elaboración y revisión de contratos, despidos justificados.",
-      "-Procesos laborales: representación ante jueces laborales o instancias administrativas.",
-      "-Prevención y resolución de conflictos: asesoría para evitar o solucionar disputas laborales.",
+      "-Representación en procesos fiscales.",
+      "-Asesoría legal frente a requerimientos de la Contraloría.",
+      "-Acompañamiento durante todo el procedimiento administrativo.",
      
     ]},
   {
+    id:"derecho-disciplinario",
     icon: <FaHome className="text-4xl text-[#DBC078]" />,
     title: "Derecho Disciplinario",
-    description: "Regula y sanciona la conducta de servidores públicos y profesionales para garantizar ética y buen funcionamiento institucional.",
+    description: (
+      <>
+        <span className="font-semibold text-[#592533]">
+        Tu defensa, con respaldo y experiencia.
+        </span>{" "}
+        Ofrecemos representación legal en procesos disciplinarios ante entidades públicas y la Procuraduría, asegurando un acompañamiento sólido desde la instrucción hasta el fallo.
+
+
+      </>
+    ),
     backContent: [
-      "-Asesoría en Procesos Disciplinarios: Orientación legal para servidores públicos o profesionales investigados.",
-      "-Representación en Investigaciones y Audiencias: Defensa técnica durante todas las etapas del proceso disciplinario.",
-      "-Acompañamiento a Víctimas o Denunciantes: Apoyo legal en la presentación de quejas y seguimiento del proceso.",
+      "-Defensa en procesos disciplinarios internos en entidades públicas.",
+      "Representación ante la Procuraduría General de la Nación.",
+      "-Acompañamiento en todas las etapas del proceso disciplinario.",
 
     ]},
   {
+    id:"derecho-constitucional",
     icon: <FaBriefcase className="text-4xl text-[#DBC078]" />,
     title: "Derecho Constitucional",
-    description: "Protege los derechos fundamentales y garantiza el respeto a la Constitución por parte de las autoridades.",
+    description: (
+      <>
+        <span className="font-semibold text-[#592533]">
+        Defendemos tus derechos fundamentales con firmeza.
+        </span>{" "}
+        Asesoramos e intervenimos en la protección de tus derechos mediante mecanismos constitucionales como tutelas, acciones de cumplimiento y derechos de petición.
+      </>
+    ),
     backContent: [
-      "-Acciones de tutela: Para proteger derechos vulnerados.",
-      "-Defensa de derechos fundamentales: Representación legal en casos de violaciones.",
-      "-Asesoría constitucional: Orientación en temas relacionados con la Carta Magna.",
+      "-Interposición de tutelas para la protección inmediata de derechos fundamentales.",
+      "-Acciones de cumplimiento para exigir el respeto de normas legales.",
+      "-Elaboración y seguimiento de derechos de petición.",
       
     ]},
   {
-    icon: <FaUserTie className="text-4xl text-[#DBC078]" />,
-    title: "Asesoría Corporativa",
-    description: "Asesoramiento legal continuo para empresas y negocios.",
+    id:"derecho-civil",
+    icon: <FaLandmark className="text-4xl text-[#DBC078]" />,
+    title: " Derecho Civil",
+    description: (
+      <>
+        <span className="font-semibold text-[#592533]">
+          Soluciones legales para proteger tu patrimonio.
+        </span>{" "}
+        Ofrecemos representación y asesoría en procesos civiles, enfocándonos en la recuperación de deudas y apoyo en situaciones de insolvencia personal.
+      </>
+    ),
     backContent: [
-      "-Constitución y reorganización empresarial: creación de sociedades y ajustes legales.",
-      "-obierno corporativo y cumplimiento: implementación de buenas prácticas y normativas.",
-      "-Asesoría estratégica: respaldo legal en decisiones comerciales clave.",
-     
-    ]},
+      "-Representación en procesos ejecutivos para el cobro de deudas.",
+      "-Asesoría y gestión en casos de insolvencia para personas naturales comerciantes y no comerciantes.",
+      "-Sucesiones y herencias.",
+    ]
+    
+    },
   {
+    id:"contratos",
     icon: <FaFileContract className="text-4xl text-[#DBC078]" />,
     title: "Contratos",
     description: "Elaboración y revisión de todo tipo de documentos contractuales.",
@@ -66,6 +110,7 @@ const services = [
       
     ]},
   {
+    id:"litigios",
     icon: <FaGavel className="text-4xl text-[#DBC078]" />,
     title: "Litigios",
     description: "Representación en procesos judiciales y arbitrajes.",
@@ -75,16 +120,18 @@ const services = [
       "-Estrategias jurídicas para la resolución de conflictos.",
      
     ]},
-  {
-    icon: <FaLandmark className="text-4xl text-[#DBC078]" />,
-    title: "Derecho Civil",
-    description: "Regula las relaciones entre personas en temas patrimoniales y personales, como contratos, familia, bienes y herencias.",
-    backContent: [
-      "-Asesoría en contratos y obligaciones: Redacción, revisión y resolución de conflictos contractuales.",
-      "-Responsabilidad civil: Reclamos por daños y perjuicios.",
-      "-Sucesiones y herencias: Acompañamiento legal en procesos de repartición de bienes.",
-      
-    ]}
+    {
+      id:"asesoria-corporativa",
+      icon: <FaUserTie className="text-4xl text-[#DBC078]" />,
+      title: "Asesoría Corporativa",
+      description: "Asesoramiento legal continuo para empresas y negocios.",
+      backContent: [
+        "-Constitución y reorganización empresarial: creación de sociedades y ajustes legales.",
+        "-obierno corporativo y cumplimiento: implementación de buenas prácticas y normativas.",
+        "-Asesoría estratégica: respaldo legal en decisiones comerciales clave.",
+      ]  
+    }
+    
 ];
 
 const ServiceCard = ({ service, index }) => {
@@ -193,13 +240,7 @@ const ServicesSection = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-xl text-[#592533] max-w-3xl mx-auto" 
           >
-            Con un enfoque en la actualización constante y el trato humano, la
-           firma prioriza la importancia de cada caso, ofreciendo atención
-           profesional, ética e incansable en cada etapa del proceso jurídico. La
-           misión principal es acompañar a los clientes con dedicación,
-           garantizar la mejor defensa de sus intereses y proporcionar un
-           espacio de confianza y respeto para alcanzar los resultados
-            esperados.
+            "Nos comprometemos con cada caso, ofreciendo un trato cercano, profesional y ético. Nuestra misión es acompañarte en todo el proceso legal, defendiendo tus intereses con dedicación y brindándote un espacio de confianza para alcanzar los mejores resultados."
           </motion.p>
         </motion.div>
         

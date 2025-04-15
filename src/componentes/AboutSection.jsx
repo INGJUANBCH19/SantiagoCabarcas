@@ -7,7 +7,7 @@ const AboutSection = () => {
   const CASES_TOTAL = 500;
   const SUCCESS_RATE = 95;
   const EXPERIENCE_YEARS = 4;
-  const SPECIALTIES = ['Derecho Penal', 'Derecho Procesal', 'Derecho Civil', 'Derecho Laboral'];
+  const SPECIALTIES = ['Derecho Penal', 'Procesos de Insolvencia', 'Acciones Constitucionales', 'Acciones de Tutela'];
   
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -35,7 +35,7 @@ const AboutSection = () => {
           >
             <div className="relative h-[500px] w-[350px] rounded-xl overflow-hidden shadow-2xl border-4 border-[#F2F2F2]">
               <img 
-                src="/images/SantiagoR.png" 
+                src="/images/perfil.jpg" 
                 alt="Abogado Santiago Cabarcas"
                 className="w-full h-full object-cover object-center"
               />
@@ -251,10 +251,10 @@ const AboutSection = () => {
       </div>
 
       <style jsx>{`
-        .clip-corner {
-          clip-path: polygon(100% 0, 0% 100%, 100% 100%);
-        }
-      `}</style>
+  .clip-corner {
+    clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+  }
+`}</style>
     </section>
   );
 };

@@ -18,11 +18,9 @@ const Header = () => {
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
     
-    // Si el scroll es hacia abajo y pasamos los 100px, ocultamos el header
     if (latest > previous && latest > 100) {
       setHidden(true);
     } 
-    // Si el scroll es hacia arriba o estamos en el top, mostramos el header
     else if (latest < previous || latest <= 100) {
       setHidden(false);
     }
@@ -36,6 +34,16 @@ const Header = () => {
       top: 0,
       behavior: 'smooth'
     });
+  };
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
   };
 
   return (
@@ -88,9 +96,11 @@ const Header = () => {
                   key={item}
                   href={`#${item.toLowerCase()}`}
                   onClick={(e) => {
+                    e.preventDefault();
                     if (item === 'Inicio') {
-                      e.preventDefault();
                       scrollToTop();
+                    } else {
+                      scrollToSection(item.toLowerCase());
                     }
                   }}
                   initial={{ y: -10, opacity: 0 }}

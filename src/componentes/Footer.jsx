@@ -1,15 +1,68 @@
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 const Footer = () => {
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+      // Comportamiento especial para "Sobre Mí"
+      if (id === 'sobre-mi') {
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+        
+        // Animación especial para "Sobre Mí"
+        element.style.transform = 'translateY(-20px)';
+        element.style.opacity = '0.8';
+        element.style.transition = 'all 0.5s ease';
+        
+        setTimeout(() => {
+          element.style.transform = 'translateY(0)';
+          element.style.opacity = '1';
+          element.style.boxShadow = '0 0 20px rgba(219, 192, 120, 0.5)';
+          
+          setTimeout(() => {
+            element.style.boxShadow = 'none';
+          }, 1500);
+        }, 300);
+      }
+      // Comportamiento para servicios
+      else if (id === 'servicios') {
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+        
+        // Animación para servicios
+        element.style.transition = 'box-shadow 0.5s ease';
+        element.style.boxShadow = '0 0 0 2px rgba(219, 192, 120, 0.5)';
+        
+        setTimeout(() => {
+          element.style.boxShadow = 'none';
+        }, 1000);
+      }
+      // Comportamiento para otras secciones
+      else {
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
     }
   };
+
+  // Servicios que coinciden con los IDs del ServicesSection
+  const servicios = [
+    { name: "Derecho Penal", id: "servicios" },
+    { name: "Responsabilidad Fiscal", id: "servicios" },
+    { name: "Derecho Disciplinario", id: "servicios" },
+    { name: "Derecho Constitucional", id: "servicios" },
+    { name: "Derecho Civil", id: "servicios" },
+    { name: "Contratos", id: "servicios" },
+    { name: "Litigios", id: "servicios" },
+    { name: "Asesoría Corporativa", id: "servicios" }
+  ];
 
   return (
     <footer className="bg-[#593134] text-[#F2F2F2] pt-16 pb-8 w-full">
@@ -48,7 +101,11 @@ const Footer = () => {
               {['Inicio', 'Servicios', 'Sobre Mí', 'Testimonios', 'Contacto'].map((item) => {
                 const id = item.toLowerCase().replace(' ', '-');
                 return (
-                  <li key={item}>
+                  <motion.li 
+                    key={item}
+                    whileHover={{ x: 5 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                  >
                     <a 
                       href={`#${id}`}
                       onClick={(e) => {
@@ -62,11 +119,12 @@ const Footer = () => {
                           scrollToSection(id);
                         }
                       }}
-                      className="text-[#F2F2F2]/80 hover:text-[#F2F2F2] transition"
+                      className="text-[#F2F2F2]/80 hover:text-[#F2F2F2] transition flex items-center"
                     >
+                      <span className="mr-2 text-[#DBC078]">→</span>
                       {item}
                     </a>
-                  </li>
+                  </motion.li>
                 );
               })}
             </ul>
@@ -76,12 +134,24 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4 text-[#DBC078]">Servicios</h3>
             <ul className="space-y-2">
-              {['Derecho Civil', 'Derecho Laboral', 'Derecho Inmobiliario', 'Derecho Mercantil', 'Asesoría Corporativa'].map((servicio) => (
-                <li key={servicio}>
-                  <a href="#" className="text-[#F2F2F2]/80 hover:text-[#F2F2F2] transition">
-                    {servicio}
+              {servicios.map((servicio) => (
+                <motion.li 
+                  key={servicio.name}
+                  whileHover={{ x: 5 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                >
+                  <a 
+                    href={`#${servicio.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(servicio.id);
+                    }}
+                    className="text-[#F2F2F2]/80 hover:text-[#F2F2F2] transition flex items-center"
+                  >
+                    <span className="mr-2 text-[#DBC078]">→</span>
+                    {servicio.name}
                   </a>
-                </li>
+                </motion.li>
               ))}
             </ul>
           </div>
@@ -106,11 +176,9 @@ const Footer = () => {
               <li className="flex items-start">
                 <FaMapMarkerAlt className="mt-1 mr-3 text-[#D91E2E]"/>
                 <address className="text-[#F2F2F2]/80 not-italic">CALLE 81#11-68 OFICINA 402 EDIFICIO CENTRO EJECUTIVO I BOGOTA</address>
-                
               </li>
               <li className="flex items-start">
                 <FaMapMarkerAlt className="mt-1 mr-3 text-[#D91E2E]"/>
-               
                 <address className="text-[#F2F2F2]/80 not-italic">CALLE 31#4-47 OFICINA 504 EDIFICIO CENTRO EJECUTIVO MONTERIA</address>
               </li>
               <li className="flex items-start">
