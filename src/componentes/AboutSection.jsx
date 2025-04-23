@@ -1,17 +1,40 @@
 import React, { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaBalanceScale, FaGavel, FaBook, FaUserTie } from 'react-icons/fa';
+import { FaBalanceScale, FaGavel, FaBook, FaUserTie, FaPhone, FaWhatsapp, FaChartLine, FaHandshake } from 'react-icons/fa';
 
 const AboutSection = () => {
-  const CASES_TOTAL = 500;
-  const SUCCESS_RATE = 95;
-  const EXPERIENCE_YEARS = 4;
-  const SPECIALTIES = ['Derecho Penal', 'Procesos de Insolvencia', 'Acciones Constitucionales', 'Acciones de Tutela'];
-  
+  const stats = {
+    casesTotal: 500,
+    successRate: 95,
+    experienceYears: 15,
+    clientsServed: 500,
+    caseTypes: {
+      penal: 180,
+      civil: 120,
+      Disciplinario: 110,
+      fiscal: 90
+    }
+  };
+
+  const specialties = [
+    'Derecho Penal',
+    'Derecho Civil',
+    'Derecho Administrativo',
+    'Acciones Constitucionales',
+    'Derecho Comercial',
+    'Derecho Laboral'
+  ];
+
+  const education = [
+    'Doctorado en Derecho Penal - Universidad del Rosario',
+    'Especialización en Derecho Constitucional - Universidad Nacional',
+    'Pregrado en Derecho - Universidad Pontificia Bolivariana'
+  ];
+
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.2
+    threshold: 0.1
   });
 
   const controls = useAnimation();
@@ -22,276 +45,295 @@ const AboutSection = () => {
     }
   }, [controls, inView]);
 
+  // Animaciones
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const barVariants = {
+    hidden: { height: 0 },
+    visible: (i) => ({
+      height: `${i}%`,
+      transition: {
+        duration: 1,
+        delay: 0.5,
+        ease: [0.16, 1, 0.3, 1]
+      }
+    })
+  };
+
   return (
     <section className="py-20 bg-white w-full" ref={ref} id="sobre-mi">
-      <div className="max-w-[1800px] mx-auto px-4">
-        <div className="lg:flex lg:items-center lg:justify-between w-full gap-12">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="lg:flex lg:items-start gap-12">
           {/* Columna de imagen */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="lg:w-[45%] mb-12 lg:mb-0 relative w-full flex justify-center"
+            className="lg:w-2/5 flex-shrink-0"
           >
-            <div className="relative h-[500px] w-[350px] rounded-xl overflow-hidden shadow-2xl border-4 border-[#F2F2F2]">
+            <div className="relative h-[500px] rounded-lg overflow-hidden shadow-md border border-gray-100">
               <img 
                 src="/images/perfil.jpg" 
                 alt="Abogado Santiago Cabarcas"
                 className="w-full h-full object-cover object-center"
               />
-              
               <motion.div
                 initial={{ scale: 0 }}
                 animate={inView ? { scale: 1 } : {}}
-                transition={{ 
-                  delay: 0.5,
-                  type: "spring",
-                  stiffness: 260,
-                  damping: 20
-                }}
-                className="absolute -bottom-4 -right-4 bg-[#593134] text-[#F2F2F2] font-bold text-xl px-6 py-3 rounded-lg shadow-lg border-2 border-[#DBC078] flex items-center"
+                transition={{ delay: 0.8 }}
+                className="absolute bottom-4 left-4 bg-[#593134] text-white px-4 py-2 rounded-lg flex items-center gap-2"
               >
-                <FaUserTie className="mr-2" />
-                +{EXPERIENCE_YEARS} años
+                <FaUserTie />
+                <span>+{stats.experienceYears} años</span>
               </motion.div>
-
-              <div className="absolute top-0 right-0 w-16 h-16 bg-[#D91E2E] clip-corner flex items-center justify-center">
-                <FaBalanceScale className="text-white text-xl transform rotate-45" />
-              </div>
-            </div>
-          </motion.div>
-          
-          {/* Columna de contenido */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:w-[55%] w-full"
-          >
-            <div className="relative">
-              <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#593134] mb-6 relative inline-block">
-                <span className="relative z-10">Sobre </span>
-                <span className="text-[#D91E2E] relative z-10">Santiago Ruiz Cabarcas</span>
-                <span className="absolute -bottom-2 left-0 w-full h-2 bg-[#DBC078]/50 z-0"></span>
-              </h2>
             </div>
 
-            <div className="space-y-6 mb-10">
-              <p className="text-lg text-[#592533] leading-relaxed border-l-4 border-[#D91E2E] pl-4">
-                <FaBook className="inline-block mr-2 text-[#DBC078]" />
-                Abogado especialista con formación en la <strong>Universidad Pontificia Bolivariana</strong> y <strong>Universidad del Rosario</strong>. Mi enfoque combina el rigor académico con la experiencia práctica en el sistema judicial colombiano.
-              </p>
-              
-              <div className="bg-[#F2F2F2] p-4 rounded-lg border border-[#E8E8E8]">
-                <h4 className="font-bold text-[#593134] mb-2 flex items-center">
-                  <FaGavel className="mr-2 text-[#D91E2E]" />
-                  Especialidades:
-                </h4>
-                <div className="grid grid-cols-2 gap-2">
-                  {SPECIALTIES.map((especialidad, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0 }}
-                      animate={inView ? { opacity: 1 } : {}}
-                      transition={{ delay: 0.3 + index * 0.1 }}
-                      className="flex items-center"
-                    >
-                      <div className="w-2 h-2 bg-[#D91E2E] rounded-full mr-2"></div>
-                      <span className="text-[#592533]">{especialidad}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-              
-              <p className="text-lg text-[#592533] leading-relaxed">
-                Mi práctica se fundamenta en tres pilares: <strong className="text-[#D91E2E]">ética profesional</strong>, <strong className="text-[#D91E2E]">estrategia legal personalizada</strong> y <strong className="text-[#D91E2E]">compromiso con los resultados</strong>. Cada caso recibe atención individualizada y un análisis exhaustivo.
-              </p>
-            </div>
-            
-            {/* Sección de estadísticas profesionales */}
-            <motion.div 
-              initial="hidden"
-              animate={controls}
-              variants={containerVariants}
-              className="mt-12"
+            {/* Información de contacto */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ delay: 1 }}
+              className="mt-6 bg-gray-50 p-4 rounded-lg"
             >
-              <h3 className="text-xl font-bold text-[#593134] mb-8 text-center border-b border-[#DBC078] pb-2">
+              <h4 className="font-medium text-[#593134] mb-3 flex items-center gap-2">
+                <FaPhone className="text-[#D91E2E]" />
+                Contacto Directo
+              </h4>
+              <div className="space-y-2">
+                <p className="text-sm text-gray-700">consultas@abogadopenalistasantiagoruiz.com</p>
+                <p className="text-sm text-gray-700">Oficina: +573127953716</p>
+                <a 
+                  href="https://wa.me/573127953716" 
+                  className="inline-flex items-center gap-2 text-sm text-[#25D366] font-medium mt-2"
+                >
+                  <FaWhatsapp /> WhatsApp
+                </a>
+              </div>
+            </motion.div>
+            
+            {/* Formación Académica */}
+            <motion.div
+              variants={itemVariants}
+              className="mb-8"
+            >
+              <h3 className="text-xl font-semibold text-[#593134] mb-4 flex items-center gap-2">
+                <FaBook className="text-[#DBC078]" />
+                Formación Académica
+              </h3>
+              <div className="space-y-3">
+                {education.map((item, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <div className="bg-[#593134]/10 p-1.5 rounded-full mt-1 flex-shrink-0">
+                      <div className="w-2 h-2 bg-[#D91E2E] rounded-full"></div>
+                    </div>
+                    <p className="text-gray-700">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Columna de contenido */}
+          <div className="lg:w-3/5 mt-8 lg:mt-0">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl font-bold text-[#593134] mb-2">
+                Santiago Ruiz Cabarcas
+              </h2>
+              <p className="text-xl text-[#D91E2E] mb-6">Abogado Especializado</p>
+              
+              <div className="prose prose-lg text-gray-700 mb-8">
+                <p>
+                  Con más de {stats.experienceYears} años de experiencia en el ejercicio profesional del derecho, 
+                  he representado con éxito a más de {stats.clientsServed} clientes en casos complejos 
+                  ante diversas jurisdicciones.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Especialidades */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.4 }}
+              className="mb-10"
+            >
+              <h3 className="text-xl font-semibold text-[#593134] mb-4 flex items-center gap-2">
+                <FaBook className="text-[#DBC078]" />
+                Áreas de Especialización
+              </h3>
+              <div className="grid grid-cols-2 gap-3">
+                {specialties.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={inView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ delay: 0.2 + index * 0.1 }}
+                    className="flex items-start gap-2"
+                  >
+                    <div className="mt-1 w-2 h-2 bg-[#D91E2E] rounded-full flex-shrink-0"></div>
+                    <span className="text-gray-700">{item}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Trayectoria Profesional */}
+            <motion.div
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
+              variants={containerVariants}
+            >
+              <h3 className="text-xl font-semibold text-[#593134] mb-6 flex items-center gap-2">
+                <FaChartLine className="text-[#DBC078]" />
                 Trayectoria Profesional
               </h3>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Experiencia en casos */}
-                <motion.div 
+
+              <div className="grid md:grid-cols-2 gap-6 mb-8">
+                {/* Casos atendidos - Versión mejorada */}
+                <motion.div
                   variants={itemVariants}
-                  className="bg-white p-6 rounded-xl shadow-md border-t-4 border-[#D91E2E] relative overflow-hidden"
+                  className="bg-gray-50 p-5 rounded-lg border border-gray-200"
                 >
-                  <div className="flex items-center justify-between mb-4">
-                    <h4 className="text-lg font-semibold text-[#593134] flex items-center">
-                      <FaBalanceScale className="mr-2 text-[#D91E2E]" />
-                      Casos atendidos
-                    </h4>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="bg-[#593134]/10 p-2 rounded-full">
+                      <FaBalanceScale className="text-[#593134]" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-[#593134]">Experiencia Comprobada</h4>
+                      <p className="text-sm text-gray-500">Más de {stats.casesTotal} casos atendidos</p>
+                    </div>
                   </div>
                   
-                  <div className="relative h-24 mb-4">
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={controls}
-                      variants={{
-                        visible: {
-                          opacity: 1,
-                          transition: {
-                            staggerChildren: 0.1,
-                            delayChildren: 0.3
-                          }
-                        }
-                      }}
-                      className="absolute inset-0 flex items-end"
-                    >
-                      {/* Gráfico de barras animado */}
-                      {[60, 80, 100, 90, 70, 50, 80, 60].map((height, i) => (
+                  <div className="h-32 relative">
+                    <div className="absolute bottom-0 left-0 right-0 flex items-end h-full gap-1">
+                      {Object.entries(stats.caseTypes).map(([key, value], i) => (
                         <motion.div
-                          key={i}
+                          key={key}
+                          custom={(value / 200) * 100}
                           variants={barVariants}
-                          className={`w-8 mx-1 ${i % 2 === 0 ? 'bg-[#593134]' : 'bg-[#DBC078]'} rounded-t-sm`}
-                          style={{ height: `${height}%` }}
+                          className={`w-full ${i % 2 === 0 ? 'bg-[#593134]' : 'bg-[#DBC078]'} rounded-t-sm`}
                         />
                       ))}
-                    </motion.div>
+                    </div>
                   </div>
                   
-                  <div className="text-center">
-                    <span className="text-3xl font-bold text-[#593134]">{CASES_TOTAL}+</span>
-                    <p className="text-[#592533] mt-2">Procesos legales gestionados con excelencia</p>
+                  <div className="mt-4 grid grid-cols-4 gap-2 text-xs">
+                    {Object.keys(stats.caseTypes).map((key) => (
+                      <div key={key} className="text-center">
+                        <p className="text-gray-500 capitalize">{key.replace(/([A-Z])/g, ' $1')}</p>
+                      </div>
+                    ))}
                   </div>
                 </motion.div>
-                
-                {/* Tasa de éxito */}
-                <motion.div 
+
+                {/* Efectividad */}
+                <motion.div
                   variants={itemVariants}
-                  className="bg-white p-6 rounded-xl shadow-md border-t-4 border-[#DBC078]"
+                  className="bg-gray-50 p-5 rounded-lg border border-gray-200"
                 >
-                  <div className="flex items-center justify-between mb-4">
-                    <h4 className="text-lg font-semibold text-[#593134] flex items-center">
-                      <FaGavel className="mr-2 text-[#DBC078]" />
-                      Efectividad legal
-                    </h4>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="bg-[#DBC078]/20 p-2 rounded-full">
+                      <FaHandshake className="text-[#D91E2E]" />
+                    </div>
+                    <h4 className="font-semibold text-[#593134]">Efectividad Legal</h4>
                   </div>
                   
-                  <div className="relative h-24 flex items-center justify-center">
+                  <div className="flex flex-col items-center">
                     <motion.div
                       initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
+                      animate={inView ? { scale: 1 } : {}}
                       transition={{ delay: 0.8 }}
-                      className="relative w-20 h-20"
+                      className="relative w-24 h-24 mb-4"
                     >
                       <svg className="w-full h-full" viewBox="0 0 36 36">
                         <path
-                          d="M18 2.0845
-                            a 15.9155 15.9155 0 0 1 0 31.831
-                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                           fill="none"
                           stroke="#E8E8E8"
                           strokeWidth="3"
                         />
                         <motion.path
-                          d="M18 2.0845
-                            a 15.9155 15.9155 0 0 1 0 31.831
-                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                           fill="none"
                           stroke="#D91E2E"
                           strokeWidth="3"
                           strokeDasharray="100, 100"
                           initial={{ strokeDashoffset: 100 }}
-                          animate={{ strokeDashoffset: 100 - SUCCESS_RATE }}
-                          transition={{ duration: 2, delay: 0.5 }}
+                          animate={{ strokeDashoffset: 100 - stats.successRate }}
+                          transition={{ duration: 1.5, delay: 0.5 }}
                         />
                       </svg>
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.5 }}
-                        className="absolute inset-0 flex items-center justify-center text-[#593134] font-bold text-xl"
-                      >
-                        {SUCCESS_RATE}%
-                      </motion.div>
+                      <div className="absolute inset-0 flex items-center justify-center text-[#593134] font-bold">
+                        {stats.successRate}%
+                      </div>
                     </motion.div>
-                  </div>
-                  
-                  <div className="text-center mt-4">
-                    <p className="text-[#592533]">
+                    <p className="text-sm text-gray-600 text-center">
                       Tasa de éxito en resoluciones favorables
                     </p>
-                    <div className="flex justify-center mt-2">
-                      {[...Array(5)].map((_, i) => (
-                        <motion.div
-                          key={i}
-                          initial={{ opacity: 0, scale: 0.5 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.7 + i * 0.1 }}
-                          className={`w-4 h-4 rounded-full ${i < Math.floor(SUCCESS_RATE / 20) ? 'bg-[#D91E2E]' : 'bg-[#E8E8E8]'} mx-1`}
-                        />
-                      ))}
-                    </div>
                   </div>
                 </motion.div>
               </div>
 
-              {/* Frase destacada */}
+              {/* Enfoque Profesional */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.5 }}
-                className="mt-12 text-center italic text-[#592533] text-lg border-t border-[#DBC078] pt-6"
+                variants={itemVariants}
+                className="bg-[#593134]/5 p-6 rounded-lg border border-[#593134]/10"
               >
-                "En el derecho, cada caso es único. Mi compromiso es brindar soluciones legales <span className="text-[#D91E2E]">estratégicas</span> y <span className="text-[#D91E2E]">personalizadas</span> que protejan sus derechos e intereses."
+                <h3 className="text-xl font-semibold text-[#593134] mb-3 flex items-center gap-2">
+                  <FaGavel className="text-[#DBC078]" />
+                  Enfoque Profesional
+                </h3>
+                <p className="text-gray-700 mb-4">
+                  Mi práctica legal se caracteriza por un enfoque estratégico y detallado de cada caso, 
+                  combinando conocimiento jurídico especializado con una comprensión profunda de las 
+                  necesidades individuales de cada cliente.
+                </p>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 bg-[#D91E2E] rounded-full mt-2 flex-shrink-0"></div>
+                    <span>Análisis exhaustivo de cada situación legal</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 bg-[#D91E2E] rounded-full mt-2 flex-shrink-0"></div>
+                    <span>Estrategias personalizadas para cada cliente</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 bg-[#D91E2E] rounded-full mt-2 flex-shrink-0"></div>
+                    <span>Seguimiento continuo y comunicación transparente</span>
+                  </li>
+                </ul>
               </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </div>
-
-      <style jsx>{`
-  .clip-corner {
-    clip-path: polygon(100% 0, 0% 100%, 100% 100%);
-  }
-`}</style>
     </section>
   );
-};
-
-// Animaciones
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.3,
-      delayChildren: 0.4
-    }
-  }
-};
-
-const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut"
-    }
-  }
-};
-
-const barVariants = {
-  hidden: { height: 0 },
-  visible: {
-    height: "100%",
-    transition: {
-      duration: 0.8,
-      ease: "backOut"
-    }
-  }
 };
 
 export default AboutSection;

@@ -5,6 +5,7 @@ import AboutSection from './componentes/AboutSection';
 import TestimonialsCarousel from './componentes/TestimoniosCarousel';
 import WhatsAppButton from './componentes/WhatsAppButton';
 import Footer from './componentes/Footer';
+import Experiencia from './componentes/Experiencia';
 import ContactForm from './componentes/ContactForm';
 import './App.css';
 
@@ -19,12 +20,16 @@ function App() {
         <section id="inicio">  {/* ← Este ID debe coincidir */}
         <HeroSection />
       </section>
+      <section id="sobre-mi">  {/* ← Este ID */}
+        <AboutSection />
+      </section>
       <section id="servicios">  {/* ← Este ID debe coincidir */}
       <ServicesSection />
       </section>
-        
-        <section id="sobre-mi">  {/* ← Este ID */}
-        <AboutSection />
+      
+       
+      <section id="experiencia">  {/* ← Este ID debe coincidir */}
+        <Experiencia/>
       </section>
       <section id="testimonios">  {/* ← Este ID */}
         <TestimonialsCarousel  />
@@ -32,6 +37,7 @@ function App() {
       <section id="contacto">  {/* ← Este ID */}
         <ContactForm />
       </section>
+      
         <Footer/>
       </main>
 

@@ -98,7 +98,7 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4 text-[#DBC078]">Enlaces Rápidos</h3>
             <ul className="space-y-2">
-              {['Inicio', 'Servicios', 'Sobre Mí', 'Testimonios', 'Contacto'].map((item) => {
+              {['Inicio', 'Sobre Mí','Servicios', 'Experiencia', 'Testimonios', 'Contacto'].map((item) => {
                 const id = item.toLowerCase().replace(' ', '-');
                 return (
                   <motion.li 
