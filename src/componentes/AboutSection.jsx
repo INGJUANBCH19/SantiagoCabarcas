@@ -122,7 +122,7 @@ const AboutSection = () => {
               </h4>
               <div className="space-y-2">
                 <p className="text-sm text-gray-700">consultas@abogadopenalistasantiagoruiz.com</p>
-                <p className="text-sm text-gray-700">Oficina: +573127953716</p>
+                <p className="text-sm text-gray-700">Llamanos: +573127953716</p>
                 <a 
                   href="https://wa.me/573127953716" 
                   className="inline-flex items-center gap-2 text-sm text-[#25D366] font-medium mt-2"
