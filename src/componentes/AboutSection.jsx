@@ -25,7 +25,7 @@ const AboutSection = () => {
   ];
 
   const education = [
-    'Especialista en Derecho Penal - Universidad del Rosario',
+    'Especialización en Derecho Penal - Universidad del Rosario',
     'Especialización en Derecho Constitucional - Universidad Nacional',
     'Pregrado en Derecho - Universidad Pontificia Bolivariana'
   ];
