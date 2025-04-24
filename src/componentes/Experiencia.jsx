@@ -49,7 +49,7 @@ const ProfessionalExperience = () => {
         icon: <FaBalanceScale className="text-[#D91E2E] text-2xl" />
       },
       {
-        title: "Colaboración con el Dr. Marcos Gabriel Peña Noguera",
+        title: " Dr. Marcos Gabriel Peña Noguera",
         description: "Apoyo en diversas áreas del derecho.",
         icon: <FaShieldAlt className="text-[#D91E2E] text-2xl" />
       },
